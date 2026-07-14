@@ -1,0 +1,380 @@
+/* ═══ VARIÁVEIS DE COR ═══ */
+:root {
+    --fundo:       #0f1117;   /* fundo da página         */
+    --card:        #1a1d27;   /* fundo dos cards         */
+    --borda:       #2a2d3a;   /* cor das bordas          */
+    --texto:       #d0ddee;   /* texto principal   antes era -> #e2e8f0;      */
+    --apagado:     #64748b;   /* texto secundário        */
+    --verde:       #22c55e;   /* LIGADO / conectado      */
+    --vermelho:    #ef4444;   /* DESLIGADO / erro        */
+    --azul:        #3b82f6;   /* destaque / pino DI      */
+    --amarelo:     #f59e0b;   /* leitura analógica       */
+    --roxo:        #a855f7;   /* saída digital           */
+    --analogico:   #42d4e7;   /* indicador analógico     */
+}
+
+/* ═══ RESET BÁSICO ═══ */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+
+/* ESTILO DA PAGINA INTEIRA */
+body{
+    background-color: var(--fundo);
+    color: var(--texto);
+    font-family: 'Arial', sans-serif;
+    font-size: 16px;
+    min-height: 100vh;
+
+    /* Organiza header, main e footer em coluna */
+    display: flex;
+    flex-direction: column;
+}
+
+/*  Header  */
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 2rem;
+    height: 60px;
+    background-color: var(--card);
+    border-bottom: 1px solid var(--borda);
+}
+
+/*   Logo - ponto colorido + titulo   */
+.logo{
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+.logo-ponto{
+    width: 12px;
+    height: 12px;
+    background-color: var(--azul);
+    border-radius: 3px;
+    display: inline-block;
+}
+
+header h1 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    color: var(--texto);
+}
+
+/*  Status do node-red no canto direito*/
+
+.status-nodered {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.82rem;
+    color: var(--texto);
+}
+
+/*  Bolinha de status (verde = conectado, vermelho = erro)  */
+.bolinha {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: var(--apagado); /* começa cinza */
+    display: inline-block;
+    transition: baclground-color 0.4s;
+}
+
+/* Classes aplicadas pelo JavaScript */
+.bolinha.conectado { background-color: var(--verde);}
+.bolinha.erro { background-color: var(--vermelho);}
+.bolinha.aguardando {
+    background-color: var(--amarelo);
+    animation: pisca 1s infinite;
+}
+
+@keyframes pisca {
+    0%, 100% { opacity: 1;}
+    50% {opacity: 0.2;}
+}
+
+
+/* MAIN */
+
+main {
+    flex: 1;    /* ocupa o espaço restante entre o header e o footer */
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;    /* espaço entre as seções */
+    padding: 2rem;
+    max-width: 700px;    /* largura maxima centralizada */
+    margin: 0 auto;
+    width: 100%;
+ 
+}
+
+/* SEÇÕES */
+
+section h2 {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--texto);
+    margin-bottom: 0.75rem;
+    padding-left: 0.25rem;
+    border-left: 3px solid var(--azul);
+    padding-left: 0.6rem;
+}
+
+
+/*  CARDS  */
+
+.card {
+    background-color: var(--card);
+    border: 1px solid var(--borda);
+    border-radius: 10px;
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+}
+
+/* Label do pino (D12, A1 e D8) */
+.pino-label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: var(--azul);
+    background-color: rgba(59, 130, 246, 0.1);
+    border: 1px solid rgba(59, 130, 246, 0.25);
+    border-radius: 5px;
+    padding: 0.2rem 0.55rem;
+    width: fit-content;
+
+}
+
+
+/* Texto de estado (LIGADO / DESLIGADO) */
+.estado {
+    font-size: 1.1rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    color: var(--apagado);
+    transition: color 0.3s;
+}
+
+/* Valor númerico grande */
+.valor {
+    font-size: 2.5rem;
+    font-weight: 700;
+    font-family: 'Courier New', monospace;
+    color: var(--apagado);
+    line-height: 1;
+    transition: 0.3s;
+}
+
+/* Horário de última leitura */
+.horario {
+    font-size: 0.72rem;
+    color: var(--texto);
+    border-top: 1px solid var(--borda);
+    padding-top: 0.6rem;
+}
+
+.horario span {
+    font-family: 'Courier New', monospace;
+}
+
+/* LED- ENTRADA DIGITAL */
+.led {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background-color: #2a2d3a;
+    border: 2px solid var(--borda);
+    transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+/* Estado LIGADO - verde com brilho */
+.led.ligado {
+    background-color: var(--verde);
+    border-color: var(--verde);
+    box-shadow: 0 0 10px var(--verde),
+                0 0 20px rgba(34, 197, 94, 0.4);
+}
+
+/* Estado DESLIGADO - vermelho fraco */
+.led.desligado {
+    background-color: var(--vermelho);
+    border-color: var(--vermelho);
+    box-shadow: 0 0 6px rgba(239, 68, 68, 0.4);
+}
+
+/* Card DI muda a borda e o texto conforme o estado */
+#card-DI.ligado { border-color: rgba(34, 197, 94, 0.3);}
+#card-DI.ligado   .estado { color: var(--verde); }
+#card-DI.ligado   .valor { color: var(--verde); }
+
+#card-DI.desligado { border-color: rgba(239, 68,  68,  0.2); }
+#card-DI.desligado   .estado { color: var(--vermelho); }
+#card-DI.desligado   .valor  { color: var(--vermelho); }
+
+
+/* BARRA DE PROGRESSO - ENTRADA ANALÓGICA */
+.barra-container {
+    height: 10px;
+    background-color: #2a2d3a;
+    border-radius: 999px;
+    overflow: hidden;
+    border: 1px solid var(--borda);
+}
+
+.barra-preenchimento {
+    height: 100%;
+    width: 0%;         /* começa em 0, JavaScript altera */
+    border-radius: 999px;
+    background: linear-gradient(90deg, var(--vermelho), var(--roxo), var(--azul), var(--analogico));
+    transition: width 0.5s ease;     /* animação suave ao atualizar */
+}
+
+/* Grid de leituras (RAW / TENSÃO / CORRENTE / PERCENTUAL) */  
+.leituras {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+}
+
+.leitura-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    background: rgba(0, 0, 0, 0,2);
+    border-radius: 6px;
+    padding: 0.5rem 0.65rem;
+    border: 1px solid var(--borda);
+}
+
+.leitura-label {
+    font-size: 0.65rem;
+    color: var(--texto);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-weight: 600;
+}
+
+.leitura-valor {
+    font-size: 1rem;
+    font-weight: 700;
+    font-family: 'Courier New', monospace;
+    color: var(--analogico);
+}
+
+/*  BOTÕES - SAÍDA DIGITAL  */
+.botoes {
+    display: flex;
+    gap: 0.7rem;
+}
+
+button {
+    flex: 1;
+    padding: 0.7rem;
+    border: none;
+    border-radius: 7px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    transition: all 0.15s;
+}
+
+/* Botão LIGAR */
+#btn-ligar {
+    background-color: rgba(34, 197, 94, 0.15);
+    color: var(--verde);
+    border: 1px solid rgba(34, 197, 94, 0.4);
+}
+
+#btn-ligar:hover {
+    background-color: rgba(34, 197, 94, 0.28);
+    box-shadow: 0 0 10px rgba(34, 197, 94, 0.2);
+}
+
+#btn-ligar:active {  transform: scale(0.97);}
+
+/* Botão DESLIGAR */
+
+#btn-desligar {
+    background-color: rgba(239, 68, 68, 0.12);
+    color: var(--vermelho);
+    border: 1px solid rgba(239, 68, 68, 0.35);
+}
+
+#btn-desligar:hover {
+    background-color: rgba(239, 68, 68, 0.22);
+    box-shadow: 0 0 10px rgba(239, 68, 68, 0.2);
+}
+
+#btn-desligar:active { transform: scale(0.97);}
+
+/* Card DO muda a borda e texto conforme último comando */
+#card-DO.ligado     { border-color: rgba(34,  197, 94,  0.25);}
+#card-DO.ligado     .estado { color: var(--verde);}
+
+#card-DO.desligado      { border-color: rgba(239, 68,  68,  0.2);}
+#card-DO.desligado      .estado {color: var(--vermelho);}
+
+/* Pino label roxo para DO */
+
+#card-DO .pino-label {
+    color: var(--roxo);
+    background-color: rgba(168, 85, 247, 0.1);
+    border-color: rgba(168, 85, 247, 0.25);
+}
+
+/*   FOOTER   */
+footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    padding: 1rem 2rem;
+    background-color: var(--card);
+    border-top: 1px solid var(--borda);
+    font-size: 0.72rem;
+    color: var(--apagado);
+}
+
+
+/*     RESPONSIVO     */
+
+@media (max-width: 480px){
+    
+    header {
+        padding: 0 1rem;
+    }
+
+
+    header h1 {
+        font-size: 0.95rem;
+    }
+
+    main {
+        padding: 1rem;
+        gap: 1.5rem;
+    }
+
+    .leituras {
+        grid-template-columns: 1fr 1fr;  /* mantém 2 colunas no celular */
+    }
+
+    .botoes {
+        flex-direction: column;
+    }
+
+    .valor {
+        font-size: 1.8rem;
+    }
+}

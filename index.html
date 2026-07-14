@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ETA Belmonte - Painel</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <span class="logo-ponto"></span>
+            <h1>Iot2050</h1>
+
+        </div>
+
+        <div class="status-nodered">
+            <!-- O círculo vai ficar verde quando conectado -->
+             <span class="bolinha" id="bolinhaStatus"></span>
+             <span id="textoStatus">Verificando Node-RED...</span>
+
+        </div>
+    </header>
+
+    <main>
+
+        <!--  ENTRADA DIGITAL -->
+
+        <section>
+
+            <h2>Entrada Digital</h2>
+
+            <div class="card" id="card-DI">
+                
+                <!-- Identificação do pino -->
+                <div class="pino-label"> D12 </div>
+
+                <!-- Indicador do (LED)-->
+                <div class="led" id="led-DI"></div>
+
+                <!-- Texto do estado atual -->
+                <p class="estado" id="estado-DI"></p>
+
+                <!-- Valor númerico (0 ou 1)-->
+                <p class="valor" id="valor-DI"></p>
+
+                <!-- Horário da última leitura -->
+                <p class="horario">
+
+                    Ultimo sinal: <span id="horario-DI">--:--:--</span>
+                </p>
+
+            </div>
+        </section>
+
+
+        <!-- ENTRADA ANALOGICA -->
+        <section>
+
+            <h2>Entrada Analógica</h2>
+
+            <div class="card" id="card-AI">
+                
+                <div class="pino-label">A1</div>
+                
+                <!-- Barra de progresso (0 a 100%)-->
+                <div class="barra-container">
+                    <div class="barra-preenchimento" id="barra-AI"></div>
+                </div>
+
+                <!-- Valores de leitura -->
+                 <div class="leituras">
+
+                    <div class="leitura-item">
+
+                        <span class="leitura-label">RAW</span>
+
+                        <span class="leitura-valor" id="raw-AI"></span>
+                    </div>
+
+                    <div class="leitura-item">
+
+                        <span class="leitura-label">Tensão</span>
+                        <span class="leitura-valor" id="tensao-AI"></span>
+                    </div>
+
+                    <div class="leitura-item">
+
+                        <span class="leitura-label">Corrente</span>
+                        <span class="leitura-valor" id="corrente-AI"></span>
+                    </div>
+
+                    <div class="leitura-item">
+
+                        <span class="leitura-label">Percentual</span>
+                        <span class="leitura-valor" id="percentual-AI"></span>
+                    </div>
+
+                 </div>
+
+                 <p class="horario">
+                    Atualizado: <span id="horario-AI">--:--:--</span>
+                 </p>
+
+            </div>
+
+        </section>
+
+        <!-- SAIDA DIGITAL -->
+        <section>
+
+            <h2>Saída Digital</h2>
+
+            <div class="card" id="card-DO">
+
+                <div class="pino-label">D8</div>
+
+                <!-- Estado atual da saída -->
+                <p class="estado" id="estado-DO">DESCONHECIDO</p>
+
+                <!-- Botões de comando -->
+                <div class="botoes">
+
+                    <button id="btn-ligar" onclick="enviarComando('LIGAR')">
+                        ▶ LIGAR
+                    </button>
+
+                    <button id="btn-desligar" onclick="enviarComando('DESLIGAR')">
+                        ■ DESLIGAR
+                    </button>
+
+                </div>
+
+                <p class="horario">
+                    Ultimo comando: <span id="horario-DO">--:--:--</span>
+                </p>
+            </div>
+
+        </section>
+    
+    </main>
+
+    <!-- RODAPÉ -->
+     
+    <footer>
+        <span>ETA Belmonte Dashboard</span>
+        <span>.</span>
+        <span id="contadorMsgs">0 atualizações</span>
+    </footer>
+
+<!-- Adicione esta linha antes do app.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mqtt/4.3.7/mqtt.min.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
