@@ -11,7 +11,7 @@
 const CONFIG = {
     host:     '610c167271144fcd85123c447dfc72bd.s1.eu.hivemq.cloud', // ← seu host do HiveMQ
     port:     8884,                    // WSS — obrigatório no browser
-    usuario:  'saaw',           // ← seu usuário HiveMQ
+    usuario:  'saae',           // ← seu usuário HiveMQ
     senha:    '31415926',             // ← sua senha HiveMQ
     clientId: 'netlify_' + Math.random().toString(16).slice(2, 8)
 };
