@@ -92,6 +92,10 @@ function conectar() {
 
     /* ── Mensagem recebida ── */
     cliente.on('message', function (topico, mensagem) {
+       // ← Adicione esta linha
+       console.log('TOPICO RECEBIDO:', topico);
+       console.log('PAYLOAD RECEBIDO:', mensagem.toString());
+       
        let dados;
         try {
             dados = JSON.parse(mensagem.toString());
