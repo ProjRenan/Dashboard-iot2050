@@ -165,24 +165,25 @@ function atualizarDI(dados) {
 
 /* ═══ ATUALIZAR ENTRADA ANALÓGICA ════════════ */
 function atualizarAI(dados) {
+
+    // ← Adicione esta linha temporariamente
+    console.log('atualizarAI chamada com:', JSON.stringify(dados));
+
     const hora = dados.timestamp
         ? dados.timestamp.slice(11, 19)
         : horaAtual();
 
-    // Atualiza barra de progresso
     const barra = document.getElementById('barra-AI');
     if (barra) {
         barra.style.width = Math.min(100, dados.percentual ?? 0) + '%';
     }
 
-    // Atualiza valores
-    setText('raw-AI',        dados.raw           ?? '—');
-    setText('tensao-AI',    (dados.tensao_V      ?? '—') + ' V');
-    setText('corrente-AI',  (dados.corrente_mA   ?? '—') + ' mA');
-    setText('percentual-AI',(dados.percentual    ?? '—') + ' %');
-    setText('horario-AI',    hora);
+    setText('raw-AI',         dados.raw          ?? '—');
+    setText('tensao-AI',     (dados.tensao_V      ?? '—') + ' V');
+    setText('corrente-AI',   (dados.corrente_mA   ?? '—') + ' mA');
+    setText('percentual-AI', (dados.percentual    ?? '—') + ' %');
+    setText('horario-AI',     hora);
 }
-
 /* ═══ ENVIAR COMANDO SAÍDA DIGITAL ═══════════ */
 function enviarComando(comando) {
     // Verifica conexão antes de enviar
