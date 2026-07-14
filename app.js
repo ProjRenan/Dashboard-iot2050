@@ -109,7 +109,7 @@ function conectar() {
         // Roteamento por tópico
         if (topico.startsWith('iot2050/io/digital/entrada/')) {
             atualizarDI(dados);
-        } else if (topico.startsWith('iot2050/io/analogico/')) {
+        } else if (topico.startsWith('iot2050/io/analogica/')) {
             atualizarAI(dados);
         }
 
