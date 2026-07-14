@@ -19,7 +19,7 @@ const CONFIG = {
 /* ═══ TÓPICOS MQTT ════════════════════════════ */
 const TOPICOS = {
     DI:     'iot2050/io/digital/entrada/#',
-    AI:     'iot2050/io/analogico/#',
+    AI:     'iot2050/io/analogica/#',
     CMD_DO: 'iot2050/io/digital/saida/D8'
 };
 
