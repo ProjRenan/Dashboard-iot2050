@@ -92,16 +92,15 @@ function conectar() {
 
     /* ── Mensagem recebida ── */
     cliente.on('message', function (topico, mensagem) {
-        let dados;
-
-        // Parse seguro do payload
+       let dados;
         try {
-            const raw = mensagem.toString();
-            dados = typeof raw === 'string' ? JSON.parse(raw) : raw;
+            dados = JSON.parse(mensagem.toString());
         } catch (e) {
             console.error('Payload inválido:', mensagem.toString());
             return;
         }
+
+        console.log('Mensagem recebida:', topico, dados);
 
         // Roteamento por tópico
         if (topico.startsWith('iot2050/io/digital/entrada/')) {
